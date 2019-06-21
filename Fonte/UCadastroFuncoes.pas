@@ -16,13 +16,11 @@ type
     lblDescricaoFuncoes: TLabel;
     edtDescricaoFuncao: TEdit;
     btnCadastrar: TButton;
-    Button1: TButton;
     btnAlterar: TButton;
     btnExcluir: TButton;
     btnMostrarFuncoes: TButton;
     DBGrid1: TDBGrid;
     procedure btnCadastrarClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -93,12 +91,6 @@ begin
   edtDescricaoFuncao.Clear;
   edtCodigoFuncoes.SetFocus;
 
-end;
-
-procedure TfrmCadastroFuncoes.Button1Click(Sender: TObject);
-begin
-  inherited;
-  Application.Terminate;
 end;
 
 procedure TfrmCadastroFuncoes.edtCodigoFuncoesChange(Sender: TObject);

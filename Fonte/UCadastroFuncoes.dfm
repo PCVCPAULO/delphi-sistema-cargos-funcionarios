@@ -1,11 +1,13 @@
 inherited frmCadastroFuncoes: TfrmCadastroFuncoes
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Cadastro de Func'#231#245'es'
-  ClientHeight = 322
-  ClientWidth = 633
+  ClientHeight = 579
+  ClientWidth = 654
   OnDestroy = FormDestroy
   OnShow = FormShow
-  ExplicitWidth = 649
-  ExplicitHeight = 361
+  ExplicitWidth = 660
+  ExplicitHeight = 608
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -47,22 +49,13 @@ inherited frmCadastroFuncoes: TfrmCadastroFuncoes
     TabOrder = 2
     OnClick = btnCadastrarClick
   end
-  object Button1: TButton
-    Left = 335
-    Top = 88
-    Width = 75
-    Height = 25
-    Caption = 'Sair'
-    TabOrder = 3
-    OnClick = Button1Click
-  end
   object btnAlterar: TButton
     Left = 96
     Top = 88
     Width = 75
     Height = 25
     Caption = 'Alterar'
-    TabOrder = 4
+    TabOrder = 3
     OnClick = btnAlterarClick
   end
   object btnExcluir: TButton
@@ -71,7 +64,7 @@ inherited frmCadastroFuncoes: TfrmCadastroFuncoes
     Width = 75
     Height = 25
     Caption = 'Excluir'
-    TabOrder = 5
+    TabOrder = 4
     OnClick = btnExcluirClick
   end
   object btnMostrarFuncoes: TButton
@@ -80,17 +73,17 @@ inherited frmCadastroFuncoes: TfrmCadastroFuncoes
     Width = 75
     Height = 25
     Caption = 'Mostrar'
-    TabOrder = 6
+    TabOrder = 5
     OnClick = btnMostrarFuncoesClick
   end
   object DBGrid1: TDBGrid
     Left = 16
     Top = 119
     Width = 609
-    Height = 194
+    Height = 442
     DataSource = DataModule1.DataSource1
     ReadOnly = True
-    TabOrder = 7
+    TabOrder = 6
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11

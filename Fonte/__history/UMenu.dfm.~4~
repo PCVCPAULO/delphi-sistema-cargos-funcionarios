@@ -1,0 +1,41 @@
+inherited frmMenu: TfrmMenu
+  BorderIcons = [biSystemMenu]
+  Caption = 'Menu'
+  ClientHeight = 329
+  ClientWidth = 695
+  Menu = MainMenu1
+  WindowState = wsMinimized
+  ExplicitWidth = 711
+  ExplicitHeight = 388
+  PixelsPerInch = 96
+  TextHeight = 13
+  object MainMenu1: TMainMenu
+    Left = 416
+    Top = 48
+    object mntCadastros: TMenuItem
+      Caption = 'Cadastro'
+      object mntCadastroFunces: TMenuItem
+        Caption = 'Cadastro de Func'#231#245'es'
+        OnClick = mntCadastroFuncesClick
+      end
+      object mntCadastroFuncionrios: TMenuItem
+        Caption = 'Cadastro de Funcion'#225'rios'
+      end
+    end
+    object mntRelatorios: TMenuItem
+      Caption = 'Relat'#243'rios'
+      object mntRelatorioFuncoes: TMenuItem
+        Caption = 'Relat'#243'rio de Fun'#231#245'es'
+      end
+      object mntRelatorioFuncionarios: TMenuItem
+        Caption = 'Relatorio de Funcion'#225'rios'
+      end
+      object mntRelatorioFuncionarioPorFuncao: TMenuItem
+        Caption = 'Relatorio de Funcion'#225'rios por Func'#231#227'o'
+      end
+      object mntRelatorioFuncionarioAniversariantes: TMenuItem
+        Caption = 'Relat'#243'rio de Funcion'#225'rios Aniversariantes'
+      end
+    end
+  end
+end

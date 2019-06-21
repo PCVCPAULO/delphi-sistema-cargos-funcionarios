@@ -1,0 +1,9 @@
+inherited frmMenu: TfrmMenu
+  Caption = 'Menu'
+  ClientHeight = 329
+  ClientWidth = 695
+  ExplicitWidth = 711
+  ExplicitHeight = 368
+  PixelsPerInch = 96
+  TextHeight = 13
+end
