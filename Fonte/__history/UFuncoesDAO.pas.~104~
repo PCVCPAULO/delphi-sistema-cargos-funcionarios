@@ -1,0 +1,125 @@
+unit UFuncoesDAO;
+
+interface
+
+uses UFuncoesModel, UDM_3LM, vcl.dialogs;
+
+type
+  TFuncoesDAO = Class
+    Procedure InserirFuncoes(Funcoes: TFuncoesModel);
+    Procedure AlterarFuncoes(Funcoes: TFuncoesModel);
+    Procedure ApagarFuncoes(Funcoes: TFuncoesModel);
+    Procedure MostraFuncoes(Retorno: TFuncoesModel; pCodigo: Integer);
+    function MostrarTodosFuncoes: TFuncoesModel;
+
+  End;
+
+implementation
+
+{ TFuncoesDAO }
+
+procedure TFuncoesDAO.AlterarFuncoes(Funcoes: TFuncoesModel);
+begin
+  with DataModule1.FDQuery1 do
+  Begin
+    Close;
+    SQL.Clear;
+    sql.Text := ' update funcoes f set f.descricao = :Descricao where f.codigo = :codigo ';
+    ParamByName('codigo').AsInteger := Funcoes.CodigoFuncao;
+    ParamByName('Descricao').AsString := Funcoes.DescricaoFuncao;
+
+    try
+      ExecSQL;
+      ShowMessage('Alteração de Função realizado com sucesso');
+    Except
+      ShowMessage('Falha na alteração de Função');
+    end;
+  End;
+end;
+
+procedure TFuncoesDAO.ApagarFuncoes(Funcoes: TFuncoesModel);
+begin
+  with DataModule1.FDQuery1 do
+  Begin
+    Close;
+    SQL.Clear;
+    sql.Text := 'Delete from funcoes where codigo = :codigo';
+    ParamByName('Codigo').AsInteger := Funcoes.CodigoFuncao;
+
+    try
+      ExecSQL;
+      ShowMessage('Exclusão de Função realizado com sucesso');
+    Except
+      ShowMessage('Falha na Exclusão de Função');
+    end;
+  End;
+end;
+
+procedure TFuncoesDAO.InserirFuncoes(Funcoes: TFuncoesModel);
+begin
+
+  with DataModule1.FDQuery1 do
+  Begin
+    Close;
+    SQL.Clear;
+    sql.Text := ' Insert into funcoes (Codigo, Descricao) Values (:Codigo, :Descricao)';
+    ParamByName('Codigo').AsInteger := Funcoes.CodigoFuncao;
+    ParamByName('Descricao').AsString := Funcoes.DescricaoFuncao;
+
+    try
+      ExecSQL;
+      ShowMessage('Cadastro de Função realizado com sucesso');
+    Except
+      ShowMessage('Falha no Cadastro de Função');
+    end;
+  End;
+
+end;
+
+Procedure TFuncoesDAO.MostraFuncoes(Retorno: TFuncoesModel; pCodigo: Integer);
+begin
+  with DataModule1.FDQuery1 do
+  Begin
+    Close;
+    SQL.Clear;
+    sql.Text := ' Select Codigo, descricao from funcoes where codigo = :codigo';
+    ParamByName('codigo').AsInteger := pCodigo;
+
+
+    try
+      Open;
+      Retorno.CodigoFuncao := FieldByName('codigo').AsInteger;
+      Retorno.DescricaoFuncao := FieldByName('Descricao').AsString;
+    Except
+      ShowMessage('Falha na pesquisa de Função');
+    end;
+  End;
+end;
+
+function TFuncoesDAO.MostrarTodosFuncoes: TFuncoesModel;
+begin
+  with DataModule1.FDQuery1 do
+  Begin
+    Close;
+    SQL.Clear;
+    sql.Text := ' Select Codigo, descricao from funcoes ';
+
+    try
+      Open;
+
+      while not (Eof) do
+      begin
+        SetLength(Result, Length(Result)+1);
+
+        Result[High(Result)] := TFuncoesModel.Create;
+        (Result[High(Result)] as TFuncoesModel).CodigoFuncao := Qry.FieldByName('ID_COR').AsString;
+      end;
+
+
+    Except
+      ShowMessage('Falha na pesquisa de Função');
+    end;
+  End;
+end;
+
+end.

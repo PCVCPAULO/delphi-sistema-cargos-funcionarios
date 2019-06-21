@@ -1,0 +1,19 @@
+program Project_3LM;
+
+uses
+  Vcl.Forms,
+  UPrincipal in 'UPrincipal.pas' {frmPrincipal},
+  UDM_3LM in 'UDM_3LM.pas' {DataModule1: TDataModule},
+  UFuncoesModel in 'UFuncoesModel.pas',
+  UCadastroFuncoes in 'UCadastroFuncoes.pas' {frmCadastroFuncoes},
+  UFuncoesDAO in 'UFuncoesDAO.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(TfrmPrincipal, frmCadastroFuncoes);
+  Application.Run;
+end.

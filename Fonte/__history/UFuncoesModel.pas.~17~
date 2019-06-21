@@ -1,0 +1,26 @@
+unit UFuncoesModel;
+
+interface
+  type
+    TFuncoesModel = class
+      private
+         // Campos
+         Fcodigo : Integer;
+         FDescricao : string;
+
+       public
+         // Proprieddades
+         Property CodigoFuncao    : Integer read getCodigo     write setCodigo;
+         Property DescricaoFuncao : string  read getDescricao  write setDescricao;
+
+       end;
+
+
+implementation
+
+{ TFuncoesModel }
+
+uses UFuncoesDAO;
+
+
+end.

@@ -1,0 +1,26 @@
+CREATE TABLE FUNCOES (
+    CODIGO INTEGER NOT NULL,
+    DESCRICAO VARCHAR(50))
+	
+alter table FUNCOES
+add constraint PK_FUNCOES
+primary key (CODIGO)
+
+CREATE TABLE FUNCIONARIOS (
+    CODIGO INTEGER NOT NULL,
+    NOME VARCHAR(50),
+    SALARIO FLOAT,
+    DT_NASCIMENTO DATE,
+    FUNCAO INTEGER NOT NULL)
+	
+alter table FUNCIONARIOS
+add constraint PK_FUNCIONARIOS
+primary key (CODIGO)
+
+alter table FUNCIONARIOS
+add constraint FK_FUNCOES
+foreign key (FUNCAO)
+references FUNCOES(CODIGO)
+	
+	
+	

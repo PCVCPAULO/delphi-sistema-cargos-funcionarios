@@ -1,0 +1,23 @@
+unit URepositotioFuncoes;
+
+interface
+
+uses
+  UFuncoesModel;
+
+type
+  TRepositorioFuncoes = Class(TFuncoesModel)
+
+  End;
+
+  Public
+  Procedure InsertFuncao(Funcoes: TFuncoesModel);
+
+
+implementation
+
+
+
+
+
+end.
