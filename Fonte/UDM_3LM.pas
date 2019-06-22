@@ -15,6 +15,9 @@ type
     FDQuery1: TFDQuery;
     DataSource1: TDataSource;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    FDQuery2: TFDQuery;
+    DataSource2: TDataSource;
+    FDGUIxWaitCursor2: TFDGUIxWaitCursor;
   private
     { Private declarations }
   public

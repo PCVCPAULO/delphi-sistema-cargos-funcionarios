@@ -16,13 +16,14 @@ object DataModule1: TDataModule1
   end
   object FDPhysFBDriverLink1: TFDPhysFBDriverLink
     VendorLib = 'C:\Projetos\Embarcadero\3LM\Banco\fbclient.dll'
-    Left = 64
-    Top = 32
+    Left = 55
+    Top = 37
   end
   object FDQuery1: TFDQuery
+    Active = True
     Connection = FDConnection1
     SQL.Strings = (
-      '')
+      'Select * from funcoes')
     Left = 192
     Top = 16
   end
@@ -33,7 +34,22 @@ object DataModule1: TDataModule1
   end
   object FDGUIxWaitCursor1: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 224
-    Top = 16
+    Left = 225
+    Top = 21
+  end
+  object FDQuery2: TFDQuery
+    Connection = FDConnection1
+    Left = 184
+    Top = 96
+  end
+  object DataSource2: TDataSource
+    DataSet = FDQuery2
+    Left = 200
+    Top = 109
+  end
+  object FDGUIxWaitCursor2: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 216
+    Top = 96
   end
 end

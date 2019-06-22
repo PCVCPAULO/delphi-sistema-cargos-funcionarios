@@ -96,6 +96,7 @@ end;
 procedure TfrmCadastroFuncoes.edtCodigoFuncoesChange(Sender: TObject);
 begin
   inherited;
+
   if (trim(edtCodigoFuncoes.Text) = EmptyStr) then
   Begin
     edtDescricaoFuncao.Clear;
@@ -112,7 +113,8 @@ begin
     cadastrar.MostraFuncoes(Dados, StrToInt(edtCodigoFuncoes.Text));
     edtDescricaoFuncao.Text := Dados.DescricaoFuncao;
     edtCodigoFuncoes.SetFocus;
-    End;
+  End;
+
 end;
 
 procedure TfrmCadastroFuncoes.btnExcluirClick(Sender: TObject);

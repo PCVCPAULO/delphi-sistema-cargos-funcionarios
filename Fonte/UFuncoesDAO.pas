@@ -11,6 +11,7 @@ type
     Procedure ApagarFuncoes(Funcoes: TFuncoesModel);
     Procedure MostraFuncoes(Retorno: TFuncoesModel; pCodigo: Integer);
     Procedure MostrarTodosFuncoes;
+    Procedure MostrarFuncoesComRetorno(Retorno: TFuncoesModel);
   End;
 
 implementation
@@ -77,6 +78,7 @@ end;
 
 Procedure TFuncoesDAO.MostraFuncoes(Retorno: TFuncoesModel; pCodigo: Integer);
 begin
+
   with DataModule1.FDQuery1 do
   Begin
     Close;
@@ -93,6 +95,25 @@ begin
       ShowMessage('Falha na pesquisa de Função');
     end;
   End;
+
+end;
+
+procedure TFuncoesDAO.MostrarFuncoesComRetorno(Retorno: TFuncoesModel);
+begin
+  with DataModule1.FDQuery1 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := 'Select codigo, descricao from funcoes ';
+
+    try
+      Open;
+      Retorno.CodigoFuncao := FieldByName('codigo').AsInteger;
+      Retorno.DescricaoFuncao := FieldByName('descricao').AsString;
+    Except
+      ShowMessage('Falha MostrarFuncoesComRetorno');
+    end;
+  end;
 end;
 
 procedure TFuncoesDAO.MostrarTodosFuncoes;

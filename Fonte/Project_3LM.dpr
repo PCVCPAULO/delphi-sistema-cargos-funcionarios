@@ -7,7 +7,10 @@ uses
   UFuncoesModel in 'UFuncoesModel.pas',
   UCadastroFuncoes in 'UCadastroFuncoes.pas' {frmCadastroFuncoes},
   UFuncoesDAO in 'UFuncoesDAO.pas',
-  UfrmMenu in 'UfrmMenu.pas' {frmMenu};
+  UfrmMenu in 'UfrmMenu.pas' {frmMenu},
+  UFuncionarioModel in 'UFuncionarioModel.pas',
+  UFuncionarioDAO in 'UFuncionarioDAO.pas',
+  UCadastroFuncionario in 'UCadastroFuncionario.pas' {frmCadastroFuncionario};
 
 {$R *.res}
 

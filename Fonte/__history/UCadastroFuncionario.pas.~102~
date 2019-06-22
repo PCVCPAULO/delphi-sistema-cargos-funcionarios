@@ -1,0 +1,153 @@
+unit UCadastroFuncionario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPrincipal, Data.DB, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
+  UDM_3LM, UFuncionarioDAO, UFuncionarioModel, Vcl.Mask, UFuncoesDAO, UFuncoesModel, Vcl.DBCtrls;
+
+type
+  TfrmCadastroFuncionario = class(TfrmPrincipal)
+    Label1: TLabel;
+    edtCodigoFuncionario: TEdit;
+    Label2: TLabel;
+    edtNomeFuncionario: TEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    btnCadastrarFuncionario: TButton;
+    edtNascimentoFuncionario: TMaskEdit;
+    edtSalarioFuncionario: TMaskEdit;
+    cmbFuncaoFuncionario: TDBLookupComboBox;
+    btnAlterarFuncionario: TButton;
+    btnExcluirFuncionario: TButton;
+    procedure btnCadastrarFuncionarioClick(Sender: TObject);
+    procedure btnMostrarFuncionariosClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnAlterarFuncionarioClick(Sender: TObject);
+    procedure GridRefresh;
+    procedure edtCodigoFuncionarioChange(Sender: TObject);
+  private
+    { Private declarations }
+    dadosFuncionario: TFuncionarioModel;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroFuncionario: TfrmCadastroFuncionario;
+  cadastrarFuncionario: TFuncionarioDAO;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCadastroFuncionario.gridRefresh;
+var
+  atualizarGrid: TFuncionarioDAO;
+begin
+
+  try
+    atualizarGrid := TFuncionarioDAO.Create;
+    atualizarGrid.mostrarTodosFuncionarios;
+  finally
+    FreeAndNil(atualizarGrid);
+  end;
+
+end;
+
+procedure TfrmCadastroFuncionario.btnAlterarFuncionarioClick(Sender: TObject);
+begin
+  inherited;
+
+  if (cadastrarFuncionario = nil) then
+    cadastrarFuncionario := TFuncionarioDAO.Create;
+
+  if (dadosFuncionario = nil) then
+    dadosFuncionario := TFuncionarioModel.Create;
+
+  dadosFuncionario.codigoFuncionario        := StrToInt(edtCodigoFuncionario.Text);
+  dadosFuncionario.NomeFuncionario          := edtNomeFuncionario.Text;
+  dadosFuncionario.SalarioFuncionario       := StrToFloat(edtSalarioFuncionario.Text);
+  dadosFuncionario.DT_NascimentoFuncionario := StrToDate(edtNascimentoFuncionario.Text);
+
+  cadastrarFuncionario.alterarFuncionario(dadosFuncionario);
+
+  GridRefresh;
+  edtCodigoFuncionario.Clear;
+  edtNomeFuncionario.Clear;
+  edtSalarioFuncionario.Clear;
+  edtNascimentoFuncionario.Clear;
+  edtCodigoFuncionario.SetFocus;
+
+end;
+
+procedure TfrmCadastroFuncionario.btnCadastrarFuncionarioClick(Sender: TObject);
+begin
+  inherited;
+
+  if (cadastrarFuncionario = nil) then
+    cadastrarFuncionario := TFuncionarioDAO.Create;
+
+  if (dadosFuncionario = nil) then
+    dadosFuncionario := TFuncionarioModel.Create;
+
+  dadosFuncionario.codigoFuncionario        := StrToInt(edtCodigoFuncionario.Text);
+  dadosFuncionario.NomeFuncionario          := edtNomeFuncionario.Text;
+  dadosFuncionario.SalarioFuncionario       := StrToFloat(edtSalarioFuncionario.Text);
+  dadosFuncionario.DT_NascimentoFuncionario := StrToDate(edtNascimentoFuncionario.Text);
+  dadosFuncionario.Cod_FuncaoFuncionario    := StrToInt(cmbFuncaoFuncionario.KeyValue);
+
+  cadastrarFuncionario.inserirFuncionario(dadosFuncionario);
+
+  GridRefresh;
+  edtCodigoFuncionario.Clear;
+  edtNomeFuncionario.Clear;
+  edtSalarioFuncionario.Clear;
+  edtNascimentoFuncionario.Clear;
+  edtCodigoFuncionario.SetFocus;
+
+end;
+
+procedure TfrmCadastroFuncionario.btnMostrarFuncionariosClick(Sender: TObject);
+begin
+  inherited;
+  GridRefresh;
+end;
+
+procedure TfrmCadastroFuncionario.edtCodigoFuncionarioChange(Sender: TObject);
+begin
+  inherited;
+
+  if (trim(edtCodigoFuncionario.Text) = EmptyStr) then
+  Begin
+    edtNomeFuncionario.Clear;
+    GridRefresh;
+  End
+  else
+  Begin
+    if (cadastrarFuncionario = nil) then
+      cadastrarFuncionario := TFuncionarioDAO.Create;
+
+    if (dadosFuncionario = nil) then
+      dadosFuncionario := TFuncoesModel.Create;
+
+    cadastrarFuncionario.mostraFuncionario(dadosFuncionario, StrToInt(edtCodigoFuncionario.Text));
+    edtNomeFuncionario.Text       := dadosFuncionario.NomeFuncionario;
+    edtSalarioFuncionario.Text    := FloatToStr(dadosFuncionario.SalarioFuncionario);
+    edtNascimentoFuncionario.Text := DateToStr(dadosFuncionario.DT_NascimentoFuncionario);
+    edtCodigoFuncionario.SetFocus;
+  End;
+
+end;
+
+procedure TfrmCadastroFuncionario.FormShow(Sender: TObject);
+begin
+  inherited;
+  GridRefresh
+end;
+
+end.
