@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPrincipal, Vcl.ExtCtrls, Vcl.StdCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, ppDB,
-  ppDBPipe, ppComm, ppRelatv, ppProd, ppClass, ppReport, ppPrnabl, ppCtrls, ppBands, ppCache, ppDesignLayer, ppParameter;
+  ppDBPipe, ppComm, ppRelatv, ppProd, ppClass, ppReport, ppPrnabl, ppCtrls, ppBands, ppCache, ppDesignLayer, ppParameter,
+  ppVar;
 
 type
   TfrmRelatorioFuncionarios = class(TfrmPrincipal)
@@ -34,6 +35,8 @@ type
     ppLabel5: TppLabel;
     ppLabel6: TppLabel;
     ppLblDataHoraRelatorioFuncionario: TppLabel;
+    ppSystemVariable1: TppSystemVariable;
+    ppLabel7: TppLabel;
     procedure montarRelatorioFuncionarios(pOrdem: Integer);
     procedure FormShow(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);

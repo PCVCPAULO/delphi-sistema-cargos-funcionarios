@@ -280,8 +280,46 @@ inherited frmRelatorioFuncoes: TfrmRelatorioFuncoes
       Background.Brush.Style = bsClear
       Border.mmPadding = 0
       mmBottomOffset = 0
-      mmHeight = 0
+      mmHeight = 6615
       mmPrintPosition = 0
+      object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label4'
+        Border.mmPadding = 0
+        Caption = 'P'#225'gina'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4233
+        mmLeft = 167752
+        mmTop = 1057
+        mmWidth = 11906
+        BandType = 8
+        LayerName = Foreground
+      end
+      object ppSystemVariable1: TppSystemVariable
+        DesignLayer = ppDesignLayer1
+        UserName = 'SystemVariable1'
+        Border.mmPadding = 0
+        VarType = vtPageNo
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        Transparent = True
+        mmHeight = 4233
+        mmLeft = 186002
+        mmTop = 1058
+        mmWidth = 6350
+        BandType = 8
+        LayerName = Foreground
+      end
     end
     object ppDesignLayers1: TppDesignLayers
       object ppDesignLayer1: TppDesignLayer

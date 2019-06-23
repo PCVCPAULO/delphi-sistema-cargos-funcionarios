@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPrincipal, Vcl.ExtCtrls, Vcl.StdCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, UDM_3LM,
   ppDB, ppDBPipe, ppBands, ppCache, ppClass, ppDesignLayer, ppParameter, ppComm, ppRelatv, ppProd, ppReport, ppPrnabl,
-  ppCtrls;
+  ppCtrls, ppVar;
 
 type
   TfrmRelatorioFuncoes = class(TfrmPrincipal)
@@ -29,6 +29,8 @@ type
     ppLblDataHoraFuncoes: TppLabel;
     ppLabel2: TppLabel;
     ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppSystemVariable1: TppSystemVariable;
     procedure FormShow(Sender: TObject);
     Procedure MontaRelatorio(pOrdem: Integer);
     procedure rgOrdemRelatorioFuncoesClick(Sender: TObject);

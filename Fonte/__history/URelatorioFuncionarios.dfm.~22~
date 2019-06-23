@@ -23,7 +23,6 @@ inherited frmRelatorioFuncionarios: TfrmRelatorioFuncionarios
   inherited Panel1: TPanel
     Width = 1084
     Caption = 'Relat'#243'rio de Funcion'#225'rios'
-    ExplicitWidth = 1084
   end
   object rgOrdemRelatorioFuncionarios: TRadioGroup
     Left = 6
@@ -140,7 +139,7 @@ inherited frmRelatorioFuncionarios: TfrmRelatorioFuncionarios
       Background.Brush.Style = bsClear
       Border.mmPadding = 0
       mmBottomOffset = 0
-      mmHeight = 18785
+      mmHeight = 17727
       mmPrintPosition = 0
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
@@ -157,7 +156,7 @@ inherited frmRelatorioFuncionarios: TfrmRelatorioFuncionarios
         FormFieldSettings.FormFieldType = fftNone
         mmHeight = 8467
         mmLeft = 2910
-        mmTop = 1852
+        mmTop = 794
         mmWidth = 90488
         BandType = 0
         LayerName = Foreground
@@ -265,12 +264,8 @@ inherited frmRelatorioFuncionarios: TfrmRelatorioFuncionarios
       object ppLblDataHoraRelatorioFuncionario: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'LblDataHoraRelatorioFuncionario'
-        ReprintOnOverFlow = True
-        Border.BorderPositions = [bpLeft, bpTop, bpRight, bpBottom]
-        Border.Visible = True
         Border.mmPadding = 0
         Caption = 'dd/mm/yyyy hh:mm:ss'
-        Color = clBlack
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
@@ -279,10 +274,10 @@ inherited frmRelatorioFuncionarios: TfrmRelatorioFuncionarios
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
-        mmHeight = 6879
-        mmLeft = 134673
-        mmTop = 1852
-        mmWidth = 57150
+        mmHeight = 6350
+        mmLeft = 135996
+        mmTop = -20108
+        mmWidth = 56621
         BandType = 0
         LayerName = Foreground
       end
@@ -389,46 +384,8 @@ inherited frmRelatorioFuncionarios: TfrmRelatorioFuncionarios
       Background.Brush.Style = bsClear
       Border.mmPadding = 0
       mmBottomOffset = 0
-      mmHeight = 5292
+      mmHeight = 0
       mmPrintPosition = 0
-      object ppSystemVariable1: TppSystemVariable
-        DesignLayer = ppDesignLayer1
-        UserName = 'SystemVariable1'
-        Border.mmPadding = 0
-        VarType = vtPageNo
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 10
-        Font.Style = [fsBold]
-        Transparent = True
-        mmHeight = 3968
-        mmLeft = 186257
-        mmTop = 1059
-        mmWidth = 5556
-        BandType = 8
-        LayerName = Foreground
-      end
-      object ppLabel7: TppLabel
-        DesignLayer = ppDesignLayer1
-        UserName = 'Label7'
-        Border.mmPadding = 0
-        Caption = 'P'#225'gina'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 10
-        Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
-        Transparent = True
-        mmHeight = 4233
-        mmLeft = 170923
-        mmTop = 1058
-        mmWidth = 11906
-        BandType = 8
-        LayerName = Foreground
-      end
     end
     object ppDesignLayers1: TppDesignLayers
       object ppDesignLayer1: TppDesignLayer
