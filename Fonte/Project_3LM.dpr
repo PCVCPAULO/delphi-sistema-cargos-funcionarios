@@ -10,7 +10,9 @@ uses
   UfrmMenu in 'UfrmMenu.pas' {frmMenu},
   UFuncionarioModel in 'UFuncionarioModel.pas',
   UFuncionarioDAO in 'UFuncionarioDAO.pas',
-  UCadastroFuncionario in 'UCadastroFuncionario.pas' {frmCadastroFuncionario};
+  UCadastroFuncionario in 'UCadastroFuncionario.pas' {frmCadastroFuncionario},
+  URelatorioFuncoes in 'URelatorioFuncoes.pas' {frmRelatorioFuncoes},
+  URelatorioFuncionarios in 'URelatorioFuncionarios.pas' {frmRelatorioFuncionarios};
 
 {$R *.res}
 

@@ -1,0 +1,90 @@
+unit URelatorioFuncoes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPrincipal, Vcl.ExtCtrls, Vcl.StdCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, UDM_3LM,
+  ppDB, ppDBPipe, ppBands, ppCache, ppClass, ppDesignLayer, ppParameter, ppComm, ppRelatv, ppProd, ppReport, ppPrnabl,
+  ppCtrls;
+
+type
+  TfrmRelatorioFuncoes = class(TfrmPrincipal)
+    rgOrdemRelatorioFuncoes: TRadioGroup;
+    dbRelatorioFuncoes: TDBGrid;
+    Button1: TButton;
+    lblDataAtual: TLabel;
+    Timer1: TTimer;
+    ppReport1: TppReport;
+    ppParameterList1: TppParameterList;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppFooterBand1: TppFooterBand;
+    ppDBPipeline1: TppDBPipeline;
+    ppLabel1: TppLabel;
+    ppDBText1: TppDBText;
+    procedure FormShow(Sender: TObject);
+    Procedure MontaRelatorio(pOrdem: Integer);
+    procedure rgOrdemRelatorioFuncoesClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+
+  private
+    { Private declarations }
+
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelatorioFuncoes: TfrmRelatorioFuncoes;
+
+implementation
+
+{$R *.dfm}
+
+uses UFuncoesDAO;
+
+procedure TfrmRelatorioFuncoes.Button1Click(Sender: TObject);
+begin
+  inherited;
+  ppDBPipeline1.DataSource := DataModule1.DataSource1;
+  ppReport1.DataPipeline := ppDBPipeline1;
+  ppReport1.Print;
+end;
+
+procedure TfrmRelatorioFuncoes.FormShow(Sender: TObject);
+begin
+  inherited;
+   MontaRelatorio(rgOrdemRelatorioFuncoes.ItemIndex);
+end;
+
+procedure TfrmRelatorioFuncoes.MontaRelatorio(pOrdem: Integer);
+var
+  relatorio: TFuncoesDAO;
+
+begin
+  try
+    relatorio := TFuncoesDAO.Create;
+    relatorio.RelatorioFuncoes(pOrdem);
+    dbRelatorioFuncoes.DataSource := DataModule1.DataSource1;
+  finally
+    FreeAndNil(relatorio);
+  end;
+end;
+
+procedure TfrmRelatorioFuncoes.rgOrdemRelatorioFuncoesClick(Sender: TObject);
+begin
+  inherited;
+  MontaRelatorio(rgOrdemRelatorioFuncoes.ItemIndex);
+end;
+
+procedure TfrmRelatorioFuncoes.Timer1Timer(Sender: TObject);
+begin
+  inherited;
+  lblDataAtual.Caption := DateTimeToStr(Now);
+end;
+
+end.

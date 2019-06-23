@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPrincipal, Vcl.Menus, UCadastroFuncionario;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPrincipal, Vcl.Menus, UCadastroFuncionario, Vcl.ExtCtrls, UDM_3LM,
+  URelatorioFuncoes;
 
 type
   TfrmMenu = class(TfrmPrincipal)
@@ -21,6 +22,9 @@ type
     procedure mntCadastroFuncesClick(Sender: TObject);
     procedure mntSairClick(Sender: TObject);
     procedure mntCadastroFuncionriosClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure mntRelatorioFuncoesClick(Sender: TObject);
+    procedure mntRelatorioFuncionariosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,7 +38,13 @@ implementation
 
 {$R *.dfm}
 
-uses UCadastroFuncoes;
+uses UCadastroFuncoes, UFuncionarioDAO, URelatorioFuncionarios;
+
+procedure TfrmMenu.FormCreate(Sender: TObject);
+begin
+  inherited;
+  Panel1.Visible := False;
+end;
 
 procedure TfrmMenu.mntCadastroFuncesClick(Sender: TObject);
 begin
@@ -55,6 +65,29 @@ begin
     frmCadastroFuncionario.ShowModal;
   finally
     FreeAndNil(frmCadastroFuncionario);
+  end;
+end;
+
+procedure TfrmMenu.mntRelatorioFuncionariosClick(Sender: TObject);
+begin
+  inherited;
+  try
+    Application.CreateForm(TfrmRelatorioFuncionarios, frmRelatorioFuncionarios);
+    frmRelatorioFuncionarios.ShowModal;
+  finally
+    FreeAndNil(frmRelatorioFuncionarios);
+  end;
+
+end;
+
+procedure TfrmMenu.mntRelatorioFuncoesClick(Sender: TObject);
+begin
+  inherited;
+  try
+    Application.CreateForm(TfrmRelatorioFuncoes, frmRelatorioFuncoes);
+    frmRelatorioFuncoes.ShowModal;
+  finally
+    FreeAndNil(frmRelatorioFuncoes);
   end;
 end;
 

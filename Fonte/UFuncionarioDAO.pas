@@ -11,6 +11,7 @@ type
     procedure inserirFuncionario(Funcionario: TFuncionarioModel);
     procedure alterarFuncionario(Funcionario: TFuncionarioModel);
     procedure excluiFuncionario(pCodigo: Integer);
+    procedure relatorioFuncionarios(pOrdem: Integer);
   end;
 
 implementation
@@ -132,6 +133,33 @@ begin
                 ' order by 1' ;
     Open;
   End;
+end;
+
+procedure TFuncionarioDAO.relatorioFuncionarios(pOrdem: Integer);
+begin
+  with DataModule1.FDQuery2 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := ' Select fn.codigo as codigo, ' +#13#10+
+                '   fn.nome as nome, ' +#13#10+
+                '   fn.cod_funcao||'' - ''||fc.descricao as Cod_Descricao, ' +#13#10+
+                '   fn.salario as salario, ' +#13#10+
+                '   CAST(LPAD(EXTRACT(DAY FROM fn.dt_nascimento), 2, ''0'') || ''/'' || LPAD(EXTRACT(MONTH FROM fn.dt_nascimento), 2, ''0'') AS VARCHAR(7)) AS Data_Nascimento ' +#13#10+
+                ' from funcionarios fn ' +#13#10+
+                ' inner join funcoes fc on (fc.codigo = fn.cod_funcao) ';
+
+    case pOrdem of
+      0: SQL.Add(' order by 1');
+      1: SQL.Add(' order by 2');
+    end;
+
+    try
+      Open;
+    except
+      ShowMessage('Falha no SQL Relatorio de Funcionarios');
+    end;
+  end;
 end;
 
 end.

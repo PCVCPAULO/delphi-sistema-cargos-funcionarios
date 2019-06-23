@@ -1,0 +1,78 @@
+inherited frmRelatorioFuncionarios: TfrmRelatorioFuncionarios
+  Caption = 'frmRelatorioFuncionarios'
+  ClientHeight = 371
+  ClientWidth = 1084
+  OnShow = FormShow
+  ExplicitWidth = 1100
+  ExplicitHeight = 410
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblDataAtualFuncionarios: TLabel [0]
+    Left = 873
+    Top = 39
+    Width = 203
+    Height = 21
+    Caption = 'dd/mm/yyyy hh:mm:ss'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -17
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited Panel1: TPanel
+    Width = 1084
+    Caption = 'Relat'#243'rio de Funcion'#225'rios'
+  end
+  object rgOrdemRelatorioFuncionarios: TRadioGroup
+    Left = 6
+    Top = 31
+    Width = 201
+    Height = 58
+    Caption = '[ Escolha a ordem ] '
+    Columns = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ItemIndex = 0
+    Items.Strings = (
+      'C'#243'digo'
+      'Alfabetica')
+    ParentFont = False
+    TabOrder = 1
+    OnClick = rgOrdemRelatorioFuncionariosClick
+  end
+  object dbRelatorioFuncionarios: TDBGrid
+    Left = 6
+    Top = 94
+    Width = 1070
+    Height = 232
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object Button1: TButton
+    Left = 418
+    Top = 332
+    Width = 233
+    Height = 33
+    Caption = 'Imprimir'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -17
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 768
+    Top = 56
+  end
+end

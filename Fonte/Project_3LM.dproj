@@ -125,6 +125,14 @@
             <Form>frmCadastroFuncionario</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="URelatorioFuncoes.pas">
+            <Form>frmRelatorioFuncoes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="URelatorioFuncionarios.pas">
+            <Form>frmRelatorioFuncionarios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

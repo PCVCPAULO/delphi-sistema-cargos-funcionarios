@@ -12,6 +12,7 @@ type
     Procedure MostraFuncoes(Retorno: TFuncoesModel; pCodigo: Integer);
     Procedure MostrarTodosFuncoes;
     Procedure MostrarFuncoesComRetorno(Retorno: TFuncoesModel);
+    procedure RelatorioFuncoes(pOrdem: Integer);
   End;
 
 implementation
@@ -125,6 +126,29 @@ begin
     SQL.Text := 'Select * from funcoes order by 1';
     Open;
   End;
+end;
+
+procedure TFuncoesDAO.RelatorioFuncoes(pOrdem: Integer);
+begin
+  with DataModule1.FDQuery1 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := ' Select f.codigo, f.descricao ' +#13#10+
+                ' from funcoes f ';
+
+    case pOrdem of
+      0: SQL.Add(' Order by 1 ');
+      1: SQL.Add(' Order by 2 ');
+    end;
+
+    try
+      Open;
+    Except
+      ShowMessage('Falha ao montar o Relatório');
+    end;
+
+  end;
 end;
 
 end.

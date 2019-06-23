@@ -15,6 +15,7 @@ uses
 
 type
   TfrmPrincipal = class(TForm)
+    Panel1: TPanel;
   private
     { Private declarations }
   public
@@ -29,5 +30,7 @@ implementation
 {$R *.dfm}
 
 uses UDM_3LM, UCadastroFuncoes;
+
+{ TfrmPrincipal }
 
 end.
