@@ -38,6 +38,8 @@ object DataModule1: TDataModule1
   end
   object FDQuery2: TFDQuery
     Connection = FDConnection1
+    SQL.Strings = (
+      '')
     Left = 184
     Top = 96
   end

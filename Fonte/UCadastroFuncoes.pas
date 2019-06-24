@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPrincipal, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Comp.UI, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls,
-  UDM_3LM, UFuncoesDAO,UFuncoesModel, Vcl.Grids, Vcl.DBGrids;
+  UDM_3LM, UFuncoesDAO,UFuncoesModel, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls;
 
 type
   TfrmCadastroFuncoes = class(TfrmPrincipal)
@@ -18,15 +18,14 @@ type
     btnCadastrar: TButton;
     btnAlterar: TButton;
     btnExcluir: TButton;
-    btnMostrarFuncoes: TButton;
     DBGrid1: TDBGrid;
     procedure btnCadastrarClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
-    procedure btnMostrarFuncoesClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCodigoFuncoesChange(Sender: TObject);
+    procedure mostrarGrid;
   private
     { Private declarations }
     Dados : TFuncoesModel;
@@ -45,8 +44,6 @@ implementation
 
 
 procedure TfrmCadastroFuncoes.btnAlterarClick(Sender: TObject);
-var
-  mostrarTodos: TFuncoesDAO;
 begin
   inherited;
 
@@ -60,13 +57,7 @@ begin
   Dados.CodigoFuncao := StrToInt(edtCodigoFuncoes.Text);
 
   cadastrar.AlterarFuncoes(Dados);
-
-  try
-    mostrarTodos := TFuncoesDAO.Create;
-    mostrarTodos.MostrarTodosFuncoes;
-  finally
-    FreeAndNil(mostrarTodos);
-  end;
+  mostrarGrid;
 
   edtCodigoFuncoes.Clear;
   edtDescricaoFuncao.Clear;
@@ -87,6 +78,8 @@ begin
   Dados.DescricaoFuncao := edtDescricaoFuncao.Text;
 
   cadastrar.InserirFuncoes(Dados);
+  mostrarGrid;
+
   edtCodigoFuncoes.Clear;
   edtDescricaoFuncao.Clear;
   edtCodigoFuncoes.SetFocus;
@@ -100,7 +93,7 @@ begin
   if (trim(edtCodigoFuncoes.Text) = EmptyStr) then
   Begin
     edtDescricaoFuncao.Clear;
-    btnMostrarFuncoesClick(Sender);
+    mostrarGrid;
   End
   else
   Begin
@@ -118,8 +111,6 @@ begin
 end;
 
 procedure TfrmCadastroFuncoes.btnExcluirClick(Sender: TObject);
-var
-  mostrarTodos: TFuncoesDAO;
 begin
   inherited;
 
@@ -131,34 +122,12 @@ begin
 
   Dados.CodigoFuncao := StrToInt(edtCodigoFuncoes.Text);
   cadastrar.ApagarFuncoes(Dados);
-
-  try
-    mostrarTodos := TFuncoesDAO.Create;
-    mostrarTodos.MostrarTodosFuncoes;
-  finally
-    FreeAndNil(mostrarTodos);
-  end;
+  mostrarGrid;
 
   edtCodigoFuncoes.Clear;
   edtDescricaoFuncao.Clear;
   edtCodigoFuncoes.SetFocus;
 
-
-
-end;
-
-procedure TfrmCadastroFuncoes.btnMostrarFuncoesClick(Sender: TObject);
-var
-  mostrarTodos: TFuncoesDAO;
-
-begin
-  inherited;
-  try
-    mostrarTodos := TFuncoesDAO.Create;
-    mostrarTodos.MostrarTodosFuncoes;
-  finally
-    FreeAndNil(mostrarTodos);
-  end;
 end;
 
 procedure TfrmCadastroFuncoes.FormDestroy(Sender: TObject);
@@ -173,7 +142,19 @@ var
   mostrarTodos: TFuncoesDAO;
 begin
   inherited;
-  btnMostrarFuncoesClick(Sender);
+  mostrarGrid;
+end;
+
+procedure TfrmCadastroFuncoes.mostrarGrid;
+var
+  mostrarTodos: TFuncoesDAO;
+begin
+  try
+    mostrarTodos := TFuncoesDAO.Create;
+    mostrarTodos.MostrarTodosFuncoes;
+  finally
+    FreeAndNil(mostrarTodos);
+  end;
 end;
 
 end.

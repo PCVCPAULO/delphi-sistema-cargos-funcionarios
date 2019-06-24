@@ -17,7 +17,6 @@ type
     Label4: TLabel;
     Label5: TLabel;
     DBGrid1: TDBGrid;
-    Panel1: TPanel;
     btnCadastrarFuncionario: TButton;
     edtNascimentoFuncionario: TMaskEdit;
     edtSalarioFuncionario: TMaskEdit;
@@ -135,6 +134,7 @@ begin
 
     dadosFuncionario.codigoFuncionario := StrToInt(edtCodigoFuncionario.Text);
     cadastrarFuncionario.excluiFuncionario(dadosFuncionario.codigoFuncionario);
+    GridRefresh;
 
     edtNomeFuncionario.Text       := dadosFuncionario.NomeFuncionario;
     edtSalarioFuncionario.Text    := FloatToStr(dadosFuncionario.SalarioFuncionario);

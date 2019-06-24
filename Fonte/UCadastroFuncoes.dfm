@@ -3,30 +3,36 @@ inherited frmCadastroFuncoes: TfrmCadastroFuncoes
   BorderStyle = bsSingle
   Caption = 'Cadastro de Func'#231#245'es'
   ClientHeight = 579
-  ClientWidth = 654
+  ClientWidth = 632
   OnDestroy = FormDestroy
   OnShow = FormShow
-  ExplicitWidth = 660
+  ExplicitWidth = 638
   ExplicitHeight = 608
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TLabel [0]
     Left = 18
-    Top = 26
+    Top = 41
     Width = 33
     Height = 13
     Caption = 'C'#243'digo'
   end
-  object lblDescricaoFuncoes: TLabel
+  object lblDescricaoFuncoes: TLabel [1]
     Left = 18
-    Top = 53
+    Top = 68
     Width = 46
     Height = 13
     Caption = 'Descri'#231#227'o'
   end
+  inherited Panel1: TPanel
+    Width = 632
+    Caption = 'Cadastro de Fun'#231#245'es'
+    TabOrder = 6
+    ExplicitWidth = 654
+  end
   object edtCodigoFuncoes: TEdit
     Left = 82
-    Top = 18
+    Top = 33
     Width = 31
     Height = 21
     MaxLength = 5
@@ -35,14 +41,14 @@ inherited frmCadastroFuncoes: TfrmCadastroFuncoes
   end
   object edtDescricaoFuncao: TEdit
     Left = 82
-    Top = 45
+    Top = 60
     Width = 543
     Height = 21
     TabOrder = 1
   end
   object btnCadastrar: TButton
     Left = 16
-    Top = 88
+    Top = 96
     Width = 75
     Height = 25
     Caption = 'Cadastrar'
@@ -51,7 +57,7 @@ inherited frmCadastroFuncoes: TfrmCadastroFuncoes
   end
   object btnAlterar: TButton
     Left = 96
-    Top = 88
+    Top = 96
     Width = 75
     Height = 25
     Caption = 'Alterar'
@@ -60,30 +66,21 @@ inherited frmCadastroFuncoes: TfrmCadastroFuncoes
   end
   object btnExcluir: TButton
     Left = 177
-    Top = 88
+    Top = 96
     Width = 75
     Height = 25
     Caption = 'Excluir'
     TabOrder = 4
     OnClick = btnExcluirClick
   end
-  object btnMostrarFuncoes: TButton
-    Left = 258
-    Top = 88
-    Width = 75
-    Height = 25
-    Caption = 'Mostrar'
-    TabOrder = 5
-    OnClick = btnMostrarFuncoesClick
-  end
   object DBGrid1: TDBGrid
     Left = 16
-    Top = 119
+    Top = 127
     Width = 609
     Height = 442
     DataSource = DataModule1.DataSource1
     ReadOnly = True
-    TabOrder = 6
+    TabOrder = 5
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
