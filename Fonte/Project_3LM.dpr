@@ -12,7 +12,9 @@ uses
   UFuncionarioDAO in 'UFuncionarioDAO.pas',
   UCadastroFuncionario in 'UCadastroFuncionario.pas' {frmCadastroFuncionario},
   URelatorioFuncoes in 'URelatorioFuncoes.pas' {frmRelatorioFuncoes},
-  URelatorioFuncionarios in 'URelatorioFuncionarios.pas' {frmRelatorioFuncionarios};
+  URelatorioFuncionarios in 'URelatorioFuncionarios.pas' {frmRelatorioFuncionarios},
+  URelatorioFuncionarioPorFuncao in 'URelatorioFuncionarioPorFuncao.pas' {frmRelatorioFuncionarioPorFuncao},
+  URelatorioFuncionariosAniversariantes in 'URelatorioFuncionariosAniversariantes.pas' {frmRelatorioFuncionariosAniversariantes};
 
 {$R *.res}
 

@@ -2,7 +2,7 @@ unit UFuncoesDAO;
 
 interface
 
-uses UFuncoesModel, UDM_3LM, vcl.dialogs;
+uses UFuncoesModel, UDM_3LM, vcl.dialogs, SysUtils;
 
 type
   TFuncoesDAO = Class
@@ -13,6 +13,7 @@ type
     Procedure MostrarTodosFuncoes;
     Procedure MostrarFuncoesComRetorno(Retorno: TFuncoesModel);
     procedure RelatorioFuncoes(pOrdem: Integer);
+    procedure RelatorioMasterFuncao;
   End;
 
 implementation
@@ -148,6 +149,23 @@ begin
       ShowMessage('Falha ao montar o Relatório');
     end;
 
+  end;
+end;
+
+procedure TFuncoesDAO.RelatorioMasterFuncao;
+begin
+  with DataModule1.FDQuery1 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := ' Select * from funcoes ';
+
+    try
+      open;
+    except
+      on E: Exception do
+        ShowMessage('Falha na Pesquisa Funcoes (Master) -> '+ e.Message);
+    end;
   end;
 end;
 

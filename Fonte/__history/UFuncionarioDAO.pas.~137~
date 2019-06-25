@@ -1,0 +1,238 @@
+unit UFuncionarioDAO;
+
+interface
+
+uses UDM_3LM, UFuncionarioModel, vcl.dialogs, SysUtils;
+
+type
+  TFuncionarioDAO = class
+    procedure mostrarTodosFuncionarios;
+    procedure mostraFuncionario(Retorno: TFuncionarioModel; pCodigo: Integer);
+    procedure inserirFuncionario(Funcionario: TFuncionarioModel);
+    procedure alterarFuncionario(Funcionario: TFuncionarioModel);
+    procedure excluiFuncionario(pCodigo: Integer);
+    procedure relatorioFuncionarios(pOrdem: Integer);
+    procedure RelatorioDetalheFuncionarioPorFuncao(pCod_Funcao: Integer);
+    Procedure RelatorioFuncionariosAniversariantes(pDiaInicial,
+                                                   pDiaFinal,
+                                                   pMesInicial,
+                                                   pMesFinal: string;
+                                                   pTodos: Boolean);
+  end;
+
+implementation
+
+{ TFuncionarioDAO }
+
+procedure TFuncionarioDAO.alterarFuncionario(Funcionario: TFuncionarioModel);
+begin
+  with DataModule1.FDQuery2 do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Text := ' Update funcionarios  '               +#13#10+
+                ' set nome = :nome, '                  +#13#10+
+                   ' salario = :salario, '             +#13#10+
+                   ' dt_nascimento = :dt_nascimento, ' +#13#10+
+                   ' cod_funcao = :cod_funcao '        +#13#10+
+                ' where codigo = :codigo ';
+
+    ParamByName('codigo').AsInteger       := Funcionario.codigoFuncionario;
+    ParamByName('nome').AsString          := Funcionario.NomeFuncionario;
+    ParamByName('salario').AsFloat        := Funcionario.SalarioFuncionario;
+    ParamByName('dt_nascimento').AsDate   := Funcionario.DT_NascimentoFuncionario;
+    ParamByName('cod_funcao').AsInteger   := Funcionario.Cod_FuncaoFuncionario;
+
+    try
+      ExecSQL;
+      ShowMessage('Alteração de Funcionarios realizado com sucesso');
+    except
+      ShowMessage('Falha na alteração de Funcionarios');
+    end;
+  End;
+end;
+
+procedure TFuncionarioDAO.excluiFuncionario(pCodigo: Integer);
+begin
+  with DataModule1.FDQuery2 do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Text := 'Delete funcionarios where codigo = :codigo  ';
+
+    ParamByName('codigo').AsInteger := pCodigo;
+
+    try
+      ExecSQL;
+      ShowMessage('Exclusão de Funcionario realizado com sucesso');
+    except
+      ShowMessage('Falha na exclusão de Funcionarios');
+    end;
+  End;
+end;
+
+procedure TFuncionarioDAO.inserirFuncionario(Funcionario: TFuncionarioModel);
+begin
+  with DataModule1.FDQuery2 do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Text := 'insert into funcionarios (codigo, nome, salario, dt_nascimento, cod_funcao)  ' +#13#10+
+                '       values (:codigo, :nome, :salario, :dt_nascimento, :cod_funcao) ';
+
+    ParamByName('codigo').AsInteger       := Funcionario.codigoFuncionario;
+    ParamByName('nome').AsString          := Funcionario.NomeFuncionario;
+    ParamByName('salario').AsFloat        := Funcionario.SalarioFuncionario;
+    ParamByName('dt_nascimento').AsDate   := Funcionario.DT_NascimentoFuncionario;
+    ParamByName('cod_funcao').AsInteger   := Funcionario.Cod_FuncaoFuncionario;
+
+    try
+      ExecSQL;
+      ShowMessage('Cadastro de Funcionarios realizado com sucesso');
+    except
+      ShowMessage('Falha no Cadastro de Funcionarios');
+    end;
+
+  End;
+end;
+
+procedure TFuncionarioDAO.mostraFuncionario(Retorno: TFuncionarioModel; pCodigo: Integer);
+begin
+
+  with DataModule1.FDQuery2 do
+  Begin
+
+    Close;
+    SQL.Clear;
+    SQL.Text := ' Select funcionarios.codigo, funcionarios.nome, funcionarios.salario, ' +#13#10+
+                       ' funcionarios.dt_nascimento, funcoes.codigo as cod_funcoes ' +#13#10+
+                ' from funcionarios ' +#13#10+
+                '  inner join funcoes  on (funcoes.codigo = funcionarios.cod_funcao) ' +#13#10+
+                ' where funcionarios.codigo = :codigo ';
+
+    ParamByName('codigo').AsInteger := pCodigo;
+
+    try
+      Open;
+      Retorno.codigoFuncionario        := FieldByName('codigo').AsInteger;
+      Retorno.NomeFuncionario          := FieldByName('nome').AsString;
+      Retorno.SalarioFuncionario       := FieldByName('salario').AsFloat;
+      Retorno.DT_NascimentoFuncionario := FieldByName('dt_nascimento').AsDateTime;
+      Retorno.Cod_FuncaoFuncionario    := FieldByName('cod_funcoes').AsInteger;
+    Except
+      ShowMessage('Falha na pesquisa de Função');
+    end;
+
+  End;
+
+end;
+
+procedure TFuncionarioDAO.mostrarTodosFuncionarios;
+begin
+  with DataModule1.FDQuery2 do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Text := ' Select fn.codigo, fn.nome, fn.salario, fn.dt_nascimento, fc.descricao as funcao ' +#13#10+
+                ' from funcionarios fn ' +#13#10+
+                '   inner join funcoes fc on (fc.codigo = fn.cod_funcao) ' +#13#10+
+                ' order by 1' ;
+    Open;
+  End;
+end;
+
+procedure TFuncionarioDAO.RelatorioDetalheFuncionarioPorFuncao(pCod_Funcao: Integer);
+begin
+  with DataModule1.FDQuery2 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text :=
+                // ' Select fn.nome, fn.cod_funcao, fc.codigo as codigo ' +#13#10+
+                 ' Select * ' +#13#10+
+                 ' from funcionarios fn ' +#13#10+
+                 ' inner join funcoes fc on (fc.codigo = fn.cod_funcao) ' +#13#10+
+                 ' where fc.codigo = :Cod_funcao ';
+
+    ParamByName('Cod_funcao').AsInteger := pCod_Funcao;
+
+    try
+      Open;
+    except
+      on E: Exception do
+        ShowMessage('Falha na Pesquisa Funcionario -> '+ e.Message);
+    end;
+
+
+  end;
+
+end;
+
+procedure TFuncionarioDAO.relatorioFuncionarios(pOrdem: Integer);
+begin
+  with DataModule1.FDQuery2 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := ' Select fn.codigo as codigo, ' +#13#10+
+                '   fn.nome as nome, ' +#13#10+
+                '   fn.cod_funcao||'' - ''||fc.descricao as Cod_Descricao, ' +#13#10+
+                '   fn.salario as salario, ' +#13#10+
+                '   CAST(LPAD(EXTRACT(DAY FROM fn.dt_nascimento), 2, ''0'') || ''/'' || LPAD(EXTRACT(MONTH FROM fn.dt_nascimento), 2, ''0'') AS VARCHAR(7)) AS Data_Nascimento ' +#13#10+
+                ' from funcionarios fn ' +#13#10+
+                ' inner join funcoes fc on (fc.codigo = fn.cod_funcao) ';
+
+    case pOrdem of
+      0: SQL.Add(' order by 1');
+      1: SQL.Add(' order by 2');
+    end;
+
+    try
+      Open;
+    except
+      ShowMessage('Falha no SQL Relatorio de Funcionarios');
+    end;
+  end;
+end;
+
+procedure TFuncionarioDAO.RelatorioFuncionariosAniversariantes(pDiaInicial,
+                                                               pDiaFinal,
+                                                               pMesInicial,
+                                                               pMesFinal: string;
+                                                               pTodos: Boolean);
+begin
+  with DataModule1.FDQuery2 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := ' Select f.codigo, f.nome, f.dt_nascimento, f.salario ' +#13#10+
+                ' from funcionarios f ' +#13#10+
+                ' where (1 = 1) ';
+
+    if pTodos = False then
+    begin
+      SQL.Add(' and extract(day from f.dt_nascimento) between :diaAniversarioInicial and :diaAniversarioFinal');
+      SQL.Add(' and extract(Month from f.dt_nascimento) between :mesAniversarioInicial and :mesAniversarioFinal');
+      SQL.Add(' order by f.Salario desc ');
+
+      ParamByName('diaAniversarioInicial').AsString := pDiaInicial;
+      ParamByName('diaAniversarioFinal').AsString := pDiaFinal;
+
+      ParamByName('mesAniversarioInicial').AsString := pMesInicial;
+      ParamByName('mesAniversarioFinal').AsString := pMesFinal;
+
+    end
+    else
+      SQL.Add(' order by f.dt_nascimento desc ');
+
+
+    try
+      Open;
+    except
+       on E: Exception do
+       raise Exception.Create('Falha ao montar Relatorio de Aniversariantes Funcionario -> '+ e.Message);
+    end;
+  end;
+end;
+
+end.

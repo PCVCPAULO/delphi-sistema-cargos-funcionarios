@@ -1,0 +1,97 @@
+inherited frmRelatorioFuncionariosAniversariantes: TfrmRelatorioFuncionariosAniversariantes
+  Caption = 'frmRelatorioFuncionariosAniversariantes'
+  ClientHeight = 306
+  ClientWidth = 891
+  ExplicitWidth = 907
+  ExplicitHeight = 345
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [0]
+    Left = 10
+    Top = 40
+    Width = 116
+    Height = 16
+    Caption = 'Dia e M'#234's Inicial : '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel [1]
+    Left = 8
+    Top = 64
+    Width = 107
+    Height = 16
+    Caption = 'Dia e M'#234's Final : '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  inherited Panel1: TPanel
+    Width = 891
+    Caption = 'Relatorio de Funcion'#225'rios Aneversariantes'
+  end
+  object edtDiaMesInicial: TMaskEdit
+    Left = 144
+    Top = 39
+    Width = 49
+    Height = 24
+    EditMask = '!99/00;1;_'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    MaxLength = 5
+    ParentFont = False
+    TabOrder = 1
+    Text = '  /  '
+  end
+  object edtDiaMesFinal: TMaskEdit
+    Left = 144
+    Top = 63
+    Width = 49
+    Height = 24
+    EditMask = '!99/00;1;_'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    MaxLength = 5
+    ParentFont = False
+    TabOrder = 2
+    Text = '  /  '
+  end
+  object CheckBox1: TCheckBox
+    Left = 8
+    Top = 90
+    Width = 201
+    Height = 17
+    Caption = 'Listar todos os Funcion'#225'rios'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+  end
+  object dbgRelatorioFuncionariosAniversariantes: TDBGrid
+    Left = 8
+    Top = 113
+    Width = 875
+    Height = 185
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+end

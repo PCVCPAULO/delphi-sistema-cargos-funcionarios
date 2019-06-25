@@ -133,6 +133,14 @@
             <Form>frmRelatorioFuncionarios</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="URelatorioFuncionarioPorFuncao.pas">
+            <Form>frmRelatorioFuncionarioPorFuncao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="URelatorioFuncionariosAniversariantes.pas">
+            <Form>frmRelatorioFuncionariosAniversariantes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

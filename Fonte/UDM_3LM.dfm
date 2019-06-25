@@ -1,7 +1,7 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   Height = 224
-  Width = 396
+  Width = 336
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\Projetos\Embarcadero\3LM\Banco\3LM.FDB'
@@ -40,17 +40,17 @@ object DataModule1: TDataModule1
     Connection = FDConnection1
     SQL.Strings = (
       '')
-    Left = 184
-    Top = 96
+    Left = 176
+    Top = 136
   end
   object DataSource2: TDataSource
     DataSet = FDQuery2
-    Left = 200
-    Top = 109
+    Left = 192
+    Top = 149
   end
-  object FDGUIxWaitCursor2: TFDGUIxWaitCursor
+  object da: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 216
-    Top = 96
+    Left = 208
+    Top = 136
   end
 end

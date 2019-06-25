@@ -1,0 +1,72 @@
+unit URelatorioFuncionariosAniversariantes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPrincipal, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, Data.DB, Vcl.Grids,
+  Vcl.DBGrids;
+
+type
+  TfrmRelatorioFuncionariosAniversariantes = class(TfrmPrincipal)
+    edtDiaMesInicial: TMaskEdit;
+    edtDiaMesFinal: TMaskEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    cbListaTodosFuncionariosAniversariantes: TCheckBox;
+    dbgRelatorioFuncionariosAniversariantes: TDBGrid;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelatorioFuncionariosAniversariantes: TfrmRelatorioFuncionariosAniversariantes;
+
+implementation
+
+{$R *.dfm}
+
+uses UFuncionarioDAO, UDM_3LM;
+
+procedure TfrmRelatorioFuncionariosAniversariantes.Button1Click(Sender: TObject);
+var
+  funcionario: TFuncionarioDAO;
+  diaInicial, diaFinal, mesInicial, mesFinal: string;
+  
+begin
+  inherited;
+  diaInicial := Copy(edtDiaMesInicial.Text,1,2);
+  diaFinal   := Copy(edtDiaMesFinal.Text,1,2);
+
+  mesInicial := Copy(edtDiaMesInicial.Text,4,2);  
+  mesFinal   := Copy(edtDiaMesFinal.Text,4,2);  
+
+  try
+    funcionario := TFuncionarioDAO.Create;
+
+    if (cbListaTodosFuncionariosAniversariantes.Checked = False) then
+      funcionario.RelatorioFuncionariosAniversariantes(diaInicial,
+                                                       diaFinal,
+                                                       mesInicial,
+                                                       mesFinal,
+                                                       False)
+    else
+      funcionario.RelatorioFuncionariosAniversariantes(diaInicial,
+                                                       diaFinal,
+                                                       mesInicial,
+                                                       mesFinal,
+                                                       True);
+
+    dbgRelatorioFuncionariosAniversariantes.DataSource := DataModule1.DataSource2;    
+  finally
+    FreeAndNil(funcionario);
+  end;
+  
+
+end;
+
+end.
