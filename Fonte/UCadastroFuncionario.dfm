@@ -78,6 +78,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Width = 606
     Caption = 'Cadastro de Funcion'#225'rios'
     TabOrder = 7
+    ExplicitWidth = 606
   end
   object edtCodigoFuncionario: TEdit
     Left = 104

@@ -58,7 +58,7 @@ begin
   Begin
     Close;
     SQL.Clear;
-    SQL.Text := 'Delete funcionarios where codigo = :codigo  ';
+    SQL.Text := 'Delete from funcionarios where codigo = :codigo  ';
 
     ParamByName('codigo').AsInteger := pCodigo;
 

@@ -12,12 +12,12 @@ type
     procedure alterarFuncionario(Funcionario: TFuncionarioModel);
     procedure excluiFuncionario(pCodigo: Integer);
     procedure relatorioFuncionarios(pOrdem: Integer);
-    procedure RelatorioDetalheFuncionarioPorFuncao(pCod_Funcao: Integer);
+    procedure RelatorioDetalheFuncionarioPorFuncao;
     Procedure RelatorioFuncionariosAniversariantes(pDiaInicial,
-                                                               pDiaFinal,
-                                                               pMesInicial,
-                                                               pMesFinal: string;
-                                                               pTodos: Boolean);
+                                                   pDiaFinal,
+                                                   pMesInicial,
+                                                   pMesFinal: string;
+                                                   pTodos: Boolean);
   end;
 
 implementation
@@ -141,20 +141,17 @@ begin
   End;
 end;
 
-procedure TFuncionarioDAO.RelatorioDetalheFuncionarioPorFuncao(pCod_Funcao: Integer);
+procedure TFuncionarioDAO.RelatorioDetalheFuncionarioPorFuncao;
 begin
   with DataModule1.FDQuery2 do
   begin
     Close;
     SQL.Clear;
     SQL.Text :=
-                // ' Select fn.nome, fn.cod_funcao, fc.codigo as codigo ' +#13#10+
-                 ' Select * ' +#13#10+
+                 ' Select fn.cod_funcao, fn.codigo, fn.nome, fn.dt_nascimento, fn.salario ' +#13#10+
                  ' from funcionarios fn ' +#13#10+
-                 ' inner join funcoes fc on (fc.codigo = fn.cod_funcao) ' +#13#10+
-                 ' where fc.codigo = :Cod_funcao ';
+                 ' inner join funcoes fc on (fc.codigo = fn.cod_funcao) ';
 
-    ParamByName('Cod_funcao').AsInteger := pCod_Funcao;
 
     try
       Open;

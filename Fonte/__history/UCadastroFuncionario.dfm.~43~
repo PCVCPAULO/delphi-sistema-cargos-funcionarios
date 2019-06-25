@@ -1,13 +1,15 @@
 inherited frmCadastroFuncionario: TfrmCadastroFuncionario
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Cadastro de Funcion'#225'rios'
-  ClientHeight = 491
-  ClientWidth = 862
+  ClientHeight = 501
+  ClientWidth = 606
   OnShow = FormShow
-  ExplicitWidth = 878
+  ExplicitWidth = 612
   ExplicitHeight = 530
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TLabel [0]
     Left = 16
     Top = 48
     Width = 43
@@ -20,7 +22,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TLabel [1]
     Left = 16
     Top = 75
     Width = 39
@@ -33,7 +35,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Font.Style = []
     ParentFont = False
   end
-  object Label3: TLabel
+  object Label3: TLabel [2]
     Left = 16
     Top = 102
     Width = 41
@@ -46,7 +48,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Font.Style = []
     ParentFont = False
   end
-  object Label4: TLabel
+  object Label4: TLabel [3]
     Left = 16
     Top = 129
     Width = 76
@@ -59,7 +61,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Font.Style = []
     ParentFont = False
   end
-  object Label5: TLabel
+  object Label5: TLabel [4]
     Left = 16
     Top = 156
     Width = 44
@@ -71,6 +73,11 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+  end
+  inherited Panel1: TPanel
+    Width = 606
+    Caption = 'Cadastro de Funcion'#225'rios'
+    TabOrder = 7
   end
   object edtCodigoFuncionario: TEdit
     Left = 104
@@ -90,7 +97,7 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
   object DBGrid1: TDBGrid
     Left = 16
     Top = 232
-    Width = 838
+    Width = 585
     Height = 251
     DataSource = DataModule1.DataSource2
     ReadOnly = True
@@ -100,23 +107,40 @@ inherited frmCadastroFuncionario: TfrmCadastroFuncionario
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-  end
-  object Panel1: TPanel
-    Left = 0
-    Top = 0
-    Width = 862
-    Height = 41
-    Align = alTop
-    Caption = 'Cadastro de Funcion'#225'rios'
-    Color = clWhite
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlue
-    Font.Height = -27
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentBackground = False
-    ParentFont = False
-    TabOrder = 7
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'codigo'
+        Title.Caption = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nome'
+        Title.Caption = 'Nome'
+        Width = 150
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'salario'
+        Title.Caption = 'Sal'#225'rio'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'dt_nascimento'
+        Title.Caption = 'Data Nascimento'
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'funcao'
+        Title.Caption = 'Fun'#231#227'o'
+        Width = 150
+        Visible = True
+      end>
   end
   object btnCadastrarFuncionario: TButton
     Left = 16
