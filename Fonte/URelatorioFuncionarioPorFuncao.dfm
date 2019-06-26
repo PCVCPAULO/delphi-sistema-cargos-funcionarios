@@ -1,12 +1,12 @@
 inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
   Caption = 'frmRelatorioFuncionarioPorFuncao'
-  ClientHeight = 398
+  ClientHeight = 338
   ClientWidth = 1031
   Position = poDesigned
   OnDestroy = FormDestroy
   OnShow = FormShow
   ExplicitWidth = 1047
-  ExplicitHeight = 437
+  ExplicitHeight = 377
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -16,7 +16,7 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
   end
   object dbgMasterFuncao: TDBGrid
     Left = 8
-    Top = 47
+    Top = 31
     Width = 705
     Height = 120
     DataSource = dsFuncao
@@ -27,13 +27,12 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OnCellClick = dbgMasterFuncaoCellClick
   end
   object dbgDetalheFuncionario: TDBGrid
     Left = 8
-    Top = 173
+    Top = 157
     Width = 1015
-    Height = 120
+    Height = 142
     DataSource = dsFuncionario
     ReadOnly = True
     TabOrder = 2
@@ -44,19 +43,25 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
     TitleFont.Style = []
   end
   object btnImprimirRelatorioFuncionarioPorFuncao: TButton
-    Left = 208
-    Top = 350
+    Left = 368
+    Top = 305
     Width = 265
-    Height = 25
+    Height = 27
     Caption = 'Imprimir'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -17
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 3
     OnClick = btnImprimirRelatorioFuncionarioPorFuncaoClick
   end
   object ppDBPipeline1: TppDBPipeline
-    DataSource = DataModule1.DataSource1
+    DataSource = DataModule1.DataSource3
     UserName = 'DBPipeline1'
-    Left = 960
-    Top = 360
+    Left = 864
+    Top = 184
   end
   object ppReport1: TppReport
     PrinterSetup.BinName = 'Default'
@@ -113,8 +118,8 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 952
-    Top = 304
+    Left = 944
+    Top = 184
     Version = '19.04'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
@@ -129,15 +134,13 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
       Background2.Brush.Style = bsClear
       Border.mmPadding = 0
       mmBottomOffset = 0
-      mmHeight = 5027
+      mmHeight = 4763
       mmPrintPosition = 0
-      object ppDBText1: TppDBText
+      object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
-        UserName = 'DBText1'
-        Border.BorderPositions = [bpLeft, bpTop, bpRight, bpBottom]
-        Border.Visible = True
+        UserName = 'DBText2'
         Border.mmPadding = 0
-        DataField = 'Descricao'
+        DataField = 'Nome'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -147,30 +150,52 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
-        mmHeight = 4293
-        mmLeft = 21696
-        mmTop = 555
-        mmWidth = 107950
+        mmHeight = 4498
+        mmLeft = 17992
+        mmTop = 265
+        mmWidth = 54769
         BandType = 4
         LayerName = Foreground
       end
-      object ppLabel1: TppLabel
+      object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
-        UserName = 'Label1'
+        UserName = 'DBText4'
         Border.mmPadding = 0
-        Caption = 'Fun'#231#227'o -> '
+        DataField = 'dt_nascimento'
+        DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        ParentDataPipeline = False
         Transparent = True
-        mmHeight = 4234
-        mmLeft = 1058
-        mmTop = 529
-        mmWidth = 16669
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 4498
+        mmLeft = 75671
+        mmTop = 265
+        mmWidth = 27517
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText3'
+        Border.mmPadding = 0
+        DataField = 'Salario'
+        DataPipeline = ppDBPipeline1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDBPipeline1'
+        mmHeight = 4498
+        mmLeft = 105304
+        mmTop = 265
+        mmWidth = 17198
         BandType = 4
         LayerName = Foreground
       end
@@ -190,14 +215,14 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
-        Font.Style = []
+        Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
-        mmHeight = 4234
+        mmHeight = 4029
         mmLeft = 1058
         mmTop = 529
-        mmWidth = 48155
+        mmWidth = 52917
         BandType = 8
         LayerName = Foreground
       end
@@ -210,14 +235,14 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
-        Font.Style = []
+        Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
-        mmHeight = 4233
-        mmLeft = 54504
-        mmTop = 503
-        mmWidth = 10054
+        mmHeight = 3619
+        mmLeft = 56964
+        mmTop = 529
+        mmWidth = 11377
         BandType = 8
         LayerName = Foreground
       end
@@ -239,82 +264,59 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
         Background.Brush.Style = bsClear
         Border.mmPadding = 0
         mmBottomOffset = 0
-        mmHeight = 0
+        mmHeight = 6350
         mmPrintPosition = 0
+        object ppLabel1: TppLabel
+          DesignLayer = ppDesignLayer1
+          UserName = 'Label1'
+          Border.mmPadding = 0
+          Caption = 'Fun'#231#227'o -> '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = []
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4234
+          mmLeft = 1058
+          mmTop = 1058
+          mmWidth = 16669
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText1: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText1'
+          Border.mmPadding = 0
+          DataField = 'Descricao'
+          DataPipeline = ppDBPipeline1
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Arial'
+          Font.Size = 10
+          Font.Style = []
+          ParentDataPipeline = False
+          Transparent = True
+          DataPipelineName = 'ppDBPipeline1'
+          mmHeight = 4233
+          mmLeft = 19837
+          mmTop = 1058
+          mmWidth = 107950
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
       end
       object ppGroupFooterBand1: TppGroupFooterBand
         Background.Brush.Style = bsClear
         Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
-        mmHeight = 5292
+        mmHeight = 0
         mmPrintPosition = 0
-        object ppDBText2: TppDBText
-          DesignLayer = ppDesignLayer1
-          UserName = 'DBText2'
-          Border.mmPadding = 0
-          DataField = 'Nome'
-          DataPipeline = ppDBPipeline1
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Name = 'Arial'
-          Font.Size = 10
-          Font.Style = []
-          ParentDataPipeline = False
-          Transparent = True
-          DataPipelineName = 'ppDBPipeline1'
-          mmHeight = 4498
-          mmLeft = 21743
-          mmTop = 265
-          mmWidth = 54749
-          BandType = 5
-          GroupNo = 0
-          LayerName = Foreground
-        end
-        object ppDBText3: TppDBText
-          DesignLayer = ppDesignLayer1
-          UserName = 'DBText3'
-          Border.mmPadding = 0
-          DataField = 'Salario'
-          DataPipeline = ppDBPipeline1
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Name = 'Arial'
-          Font.Size = 10
-          Font.Style = []
-          ParentDataPipeline = False
-          Transparent = True
-          DataPipelineName = 'ppDBPipeline1'
-          mmHeight = 4498
-          mmLeft = 108520
-          mmTop = 265
-          mmWidth = 17198
-          BandType = 5
-          GroupNo = 0
-          LayerName = Foreground
-        end
-        object ppDBText4: TppDBText
-          DesignLayer = ppDesignLayer1
-          UserName = 'DBText4'
-          Border.mmPadding = 0
-          DataField = 'dt_nascimento'
-          DataPipeline = ppDBPipeline1
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Name = 'Arial'
-          Font.Size = 10
-          Font.Style = []
-          ParentDataPipeline = False
-          Transparent = True
-          DataPipelineName = 'ppDBPipeline1'
-          mmHeight = 4498
-          mmLeft = 78893
-          mmTop = 265
-          mmWidth = 27476
-          BandType = 5
-          GroupNo = 0
-          LayerName = Foreground
-        end
       end
     end
     object ppDesignLayers1: TppDesignLayers
@@ -339,29 +341,52 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
   end
   object mdFuncionarios: TClientDataSet
     Aggregates = <>
-    IndexFieldNames = 'codFuncao'
+    FieldDefs = <
+      item
+        Name = 'COD_FUNCAO'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'DT_NASCIMENTO'
+        DataType = ftTimeStamp
+      end
+      item
+        Name = 'SALARIO'
+        DataType = ftSingle
+      end>
+    IndexDefs = <>
+    IndexFieldNames = 'COD_FUNCAO'
     MasterFields = 'Codigo'
     MasterSource = dsFuncao
     PacketRecords = 0
     Params = <>
-    ProviderName = 'DataSetProvider1'
+    ProviderName = 'dspFuncionario'
+    StoreDefs = True
     Left = 768
     Top = 104
-    object mdFuncionarioscodFuncao: TIntegerField
-      FieldName = 'codFuncao'
+    object mdFuncionariosCOD_FUNCAO: TIntegerField
+      FieldName = 'COD_FUNCAO'
+      Origin = 'COD_FUNCAO'
+      Required = True
     end
-    object mdFuncionariosCodigoFuncionario: TIntegerField
-      FieldName = 'CodigoFuncionario'
-    end
-    object mdFuncionariosDTNascimento: TDateField
-      FieldName = 'DTNascimento'
-    end
-    object mdFuncionariosSalario: TStringField
-      FieldName = 'Salario'
+    object mdFuncionariosNOME: TStringField
+      FieldName = 'NOME'
+      Origin = 'NOME'
       Size = 50
     end
-    object mdFuncionariosNome: TStringField
-      FieldName = 'Nome'
+    object mdFuncionariosDT_NASCIMENTO: TSQLTimeStampField
+      FieldName = 'DT_NASCIMENTO'
+      Origin = 'DT_NASCIMENTO'
+    end
+    object mdFuncionariosSALARIO: TSingleField
+      FieldName = 'SALARIO'
+      Origin = 'SALARIO'
     end
   end
   object dspFuncionario: TDataSetProvider
@@ -373,6 +398,7 @@ inherited frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFuncoes'
+    AfterScroll = mdFuncoesAfterScroll
     Left = 768
     Top = 40
     object mdFuncoesCodigo: TIntegerField

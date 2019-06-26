@@ -1,0 +1,199 @@
+unit URelatorioFuncionarioPorFuncao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPrincipal, Vcl.ExtCtrls, Data.DB, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  UDM_3LM, UFuncoesDAO, UFuncionarioDAO, UFuncoesModel, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  ppPrnabl, ppClass, ppCtrls, ppBands, ppCache, ppDesignLayer, ppParameter, ppDB, ppDBPipe, ppComm, ppRelatv, ppProd,
+  ppReport, ppStrtch, ppSubRpt, Datasnap.DBClient, Datasnap.Provider;
+
+type
+  TfrmRelatorioFuncionarioPorFuncao = class(TfrmPrincipal)
+    dbgMasterFuncao: TDBGrid;
+    dbgDetalheFuncionario: TDBGrid;
+    ppDBPipeline1: TppDBPipeline;
+    btnImprimirRelatorioFuncionarioPorFuncao: TButton;
+    ppReport1: TppReport;
+    ppParameterList1: TppParameterList;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppFooterBand1: TppFooterBand;
+    ppDBText1: TppDBText;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppDBText2: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText4: TppDBText;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppLabel3: TppLabel;
+    dsFuncao: TDataSource;
+    dsFuncionario: TDataSource;
+    mdFuncionarios: TClientDataSet;
+    dspFuncionario: TDataSetProvider;
+    mdFuncoes: TClientDataSet;
+    mdFuncoesCodigo: TIntegerField;
+    mdFuncoesDescricao: TStringField;
+    dspFuncoes: TDataSetProvider;
+    mdFuncionariosCOD_FUNCAO: TIntegerField;
+    mdFuncionariosNOME: TStringField;
+    mdFuncionariosDT_NASCIMENTO: TSQLTimeStampField;
+    mdFuncionariosSALARIO: TSingleField;
+    procedure FormDestroy(Sender: TObject);
+    procedure dbgMasterFuncaoCellClick(Column: TColumn);
+    procedure btnImprimirRelatorioFuncionarioPorFuncaoClick(Sender: TObject);
+    Procedure montarMasterFuncoes;
+    procedure montaDetalheFuncionarios;
+    procedure FormShow(Sender: TObject);
+    procedure PopulaCdsFuncao;
+    procedure dbgMasterFuncaoGesture(Sender: TObject; const EventInfo: TGestureEventInfo; var Handled: Boolean);
+  private
+    { Private declarations }
+    funcoes: TFuncoesDAO;
+    funcionario : TFuncionarioDAO;
+    funcaoModel : TFuncoesModel;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelatorioFuncionarioPorFuncao: TfrmRelatorioFuncionarioPorFuncao;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRelatorioFuncionarioPorFuncao.btnImprimirRelatorioFuncionarioPorFuncaoClick(Sender: TObject);
+begin
+  inherited;
+  ppDBPipeline1.DataSource := DataModule1.DataSource1;
+  ppReport1.DataPipeline := ppDBPipeline1;
+  ppReport1.Print;
+end;
+
+procedure TfrmRelatorioFuncionarioPorFuncao.dbgMasterFuncaoCellClick(Column: TColumn);
+begin
+  inherited;
+{
+  if Assigned(funcaoModel) then
+    FreeAndNil(funcaoModel);
+
+  funcaoModel := TFuncoesModel.Create;
+  funcaoModel.CodigoFuncao := dbgMasterFuncao.Fields[0].AsInteger;
+
+  if Assigned(funcionario) then
+    FreeAndNil(funcionario);
+
+  //DataModule1.FDQuery2.MasterFields := 'codigo';
+  //DataModule1.FDQuery2.MasterSource := DataModule1.DataSource1;
+  funcionario := TFuncionarioDAO.Create;
+  funcionario.RelatorioDetalheFuncionarioPorFuncao(funcaoModel.CodigoFuncao);
+
+  dbgDetalheFuncionario.DataSource := DataModule1.DataSource2;
+ }
+
+  funcionario := TFuncionarioDAO.Create;
+  funcionario.RelatorioDetalheFuncionarioPorFuncao(mdFuncoesCodigo.AsInteger);
+  dbgDetalheFuncionario.DataSource := DataModule1.DataSource2;
+
+end;
+
+procedure TfrmRelatorioFuncionarioPorFuncao.dbgMasterFuncaoGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
+  var Handled: Boolean);
+begin
+  inherited;
+    funcionario := TFuncionarioDAO.Create;
+  funcionario.RelatorioDetalheFuncionarioPorFuncao(mdFuncoesCodigo.AsInteger);
+  dbgDetalheFuncionario.DataSource := DataModule1.DataSource2;
+end;
+
+procedure TfrmRelatorioFuncionarioPorFuncao.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  FreeAndNil(funcoes);
+  FreeAndNil(funcionario);
+end;
+
+procedure TfrmRelatorioFuncionarioPorFuncao.FormShow(Sender: TObject);
+begin
+  inherited;
+  montarMasterFuncoes;
+  montaDetalheFuncionarios;
+  mdFuncoes.Active := True;
+  mdFuncionarios.Active := True;
+  //PopulaCdsFuncao;
+  //dbgMasterFuncao.DataSource := FDMemTable1.DataSource;
+end;
+
+procedure TfrmRelatorioFuncionarioPorFuncao.montaDetalheFuncionarios;
+begin
+  if Assigned(funcionario) then
+    FreeAndNil(funcionario);
+
+  funcionario := TFuncionarioDAO.Create;
+  funcionario.RelatorioDetalheFuncionarioPorFuncao;
+end;
+
+procedure TfrmRelatorioFuncionarioPorFuncao.montarMasterFuncoes;
+begin
+  if Assigned(funcoes) then
+    FreeAndNil(funcoes);
+
+  funcoes := TFuncoesDAO.Create;
+  funcoes.RelatorioMasterFuncao;
+
+  //dbgMasterFuncao.DataSource := DataModule1.DataSource1;
+  dbgMasterFuncao.SetFocus;
+end;
+
+procedure TfrmRelatorioFuncionarioPorFuncao.PopulaCdsFuncao;
+var
+ i: Integer;
+
+begin
+  with DataModule1.FDQuery1 do
+  begin
+    {
+    mdFuncoes.Close;
+    mdFuncoes.Open;
+    while not (DataModule1.FDQuery1.Eof) do
+    begin
+      mdFuncoes.Append;
+      mdFuncoesCodigo.AsInteger    := FieldByName('codigo').AsInteger;
+      mdFuncoesDescricao.AsString  := FieldByName('Descricao').AsString;
+      mdFuncoes.Post;
+      Next;
+    end;
+    mdFuncoes.First;
+    }
+  end;
+
+  {
+  with DataModule1.FDQuery2 do
+  begin
+    First;
+    mdFuncionarios.Close;
+    mdFuncionarios.Open;
+    while not (Eof) do
+    begin
+      mdFuncionarios.Append;
+      mdFuncionariosCodFuncao.AsInteger := FieldByName('cod_funcao').AsInteger;
+      mdFuncionariosCodigoFuncionario.AsInteger := FieldByName('codigo').AsInteger;
+      mdFuncionariosDTNascimento.AsDateTime := FieldByName('dt_nascimento').AsDateTime;
+      mdFuncionariosSalario.AsFloat := FieldByName('salario').AsFloat;
+      mdFuncionariosNome.AsString := FieldByName('nome').AsString;
+      mdFuncionarios.Post;
+      Next;
+    end;
+  end;
+  mdFuncionarios.First;
+  }
+end;
+
+end.

@@ -300,9 +300,10 @@ inherited frmRelatorioFuncionariosAniversariantes: TfrmRelatorioFuncionariosAniv
         Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
-        mmLeft = 111390
+        mmLeft = 125942
         mmTop = 12700
         mmWidth = 12171
         BandType = 0
@@ -385,12 +386,14 @@ inherited frmRelatorioFuncionariosAniversariantes: TfrmRelatorioFuncionariosAniv
         Border.mmPadding = 0
         DataField = 'salario'
         DataPipeline = ppDBPipeline1
+        DisplayFormat = '$ #,0.00;($#,0.00)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
         ParentDataPipeline = False
+        TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'ppDBPipeline1'
         mmHeight = 4498
@@ -494,5 +497,46 @@ inherited frmRelatorioFuncionariosAniversariantes: TfrmRelatorioFuncionariosAniv
     UserName = 'DBPipeline1'
     Left = 760
     Top = 64
+    object ppDBPipeline1ppField1: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'COD_FUNCAO'
+      FieldName = 'COD_FUNCAO'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 0
+      Position = 0
+    end
+    object ppDBPipeline1ppField2: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'CODIGO'
+      FieldName = 'CODIGO'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 1
+    end
+    object ppDBPipeline1ppField3: TppField
+      FieldAlias = 'NOME'
+      FieldName = 'NOME'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 2
+    end
+    object ppDBPipeline1ppField4: TppField
+      FieldAlias = 'DT_NASCIMENTO'
+      FieldName = 'DT_NASCIMENTO'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 34
+      Position = 3
+    end
+    object ppDBPipeline1ppField5: TppField
+      FieldAlias = 'SALARIO'
+      FieldName = 'SALARIO'
+      FieldLength = 0
+      DataType = dtSingle
+      DisplayWidth = 10
+      Position = 4
+    end
   end
 end

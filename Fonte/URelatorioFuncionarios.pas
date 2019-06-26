@@ -65,6 +65,7 @@ begin
   ppDBPipeline1.DataSource := DataModule1.DataSource2;
   ppReport1.DataPipeline := ppDBPipeline1;
   ppLblDataHoraRelatorioFuncionario.Caption := DateTimeToStr(Now);
+  ppReport1.PreviewFormSettings.ZoomPercentage := 100;
   ppReport1.Print;
 end;
 

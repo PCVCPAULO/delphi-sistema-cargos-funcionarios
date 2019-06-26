@@ -17,7 +17,8 @@ type
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     FDQuery2: TFDQuery;
     DataSource2: TDataSource;
-    da: TFDGUIxWaitCursor;
+    FDQuery3: TFDQuery;
+    DataSource3: TDataSource;
   private
     { Private declarations }
   public
@@ -26,6 +27,7 @@ type
 
 var
   DataModule1: TDataModule1;
+  x: TFDQuery;
 
 implementation
 

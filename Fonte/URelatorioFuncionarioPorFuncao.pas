@@ -37,22 +37,20 @@ type
     dsFuncionario: TDataSource;
     mdFuncionarios: TClientDataSet;
     dspFuncionario: TDataSetProvider;
-    mdFuncionarioscodFuncao: TIntegerField;
-    mdFuncionariosCodigoFuncionario: TIntegerField;
-    mdFuncionariosDTNascimento: TDateField;
-    mdFuncionariosSalario: TStringField;
-    mdFuncionariosNome: TStringField;
     mdFuncoes: TClientDataSet;
     mdFuncoesCodigo: TIntegerField;
     mdFuncoesDescricao: TStringField;
     dspFuncoes: TDataSetProvider;
+    mdFuncionariosCOD_FUNCAO: TIntegerField;
+    mdFuncionariosNOME: TStringField;
+    mdFuncionariosDT_NASCIMENTO: TSQLTimeStampField;
+    mdFuncionariosSALARIO: TSingleField;
     procedure FormDestroy(Sender: TObject);
-    procedure dbgMasterFuncaoCellClick(Column: TColumn);
     procedure btnImprimirRelatorioFuncionarioPorFuncaoClick(Sender: TObject);
     Procedure montarMasterFuncoes;
     procedure montaDetalheFuncionarios;
     procedure FormShow(Sender: TObject);
-    procedure PopulaCdsFuncao;
+    procedure mdFuncoesAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     funcoes: TFuncoesDAO;
@@ -72,31 +70,11 @@ implementation
 procedure TfrmRelatorioFuncionarioPorFuncao.btnImprimirRelatorioFuncionarioPorFuncaoClick(Sender: TObject);
 begin
   inherited;
-  ppDBPipeline1.DataSource := DataModule1.DataSource1;
+  funcoes.RelatorioFuncionarioPorFuncaoImprimir;
+  ppDBPipeline1.DataSource := DataModule1.DataSource3;
   ppReport1.DataPipeline := ppDBPipeline1;
+  ppReport1.PreviewFormSettings.ZoomPercentage := 100;
   ppReport1.Print;
-end;
-
-procedure TfrmRelatorioFuncionarioPorFuncao.dbgMasterFuncaoCellClick(Column: TColumn);
-begin
-  inherited;
-{
-  if Assigned(funcaoModel) then
-    FreeAndNil(funcaoModel);
-
-  funcaoModel := TFuncoesModel.Create;
-  funcaoModel.CodigoFuncao := dbgMasterFuncao.Fields[0].AsInteger;
-
-  if Assigned(funcionario) then
-    FreeAndNil(funcionario);
-
-  //DataModule1.FDQuery2.MasterFields := 'codigo';
-  //DataModule1.FDQuery2.MasterSource := DataModule1.DataSource1;
-  funcionario := TFuncionarioDAO.Create;
-  funcionario.RelatorioDetalheFuncionarioPorFuncao(funcaoModel.CodigoFuncao);
-
-  dbgDetalheFuncionario.DataSource := DataModule1.DataSource2;
- }
 end;
 
 procedure TfrmRelatorioFuncionarioPorFuncao.FormDestroy(Sender: TObject);
@@ -111,8 +89,16 @@ begin
   inherited;
   montarMasterFuncoes;
   montaDetalheFuncionarios;
-  PopulaCdsFuncao;
-  //dbgMasterFuncao.DataSource := FDMemTable1.DataSource;
+  mdFuncoes.Active := True;
+  mdFuncionarios.Active := True;
+end;
+
+procedure TfrmRelatorioFuncionarioPorFuncao.mdFuncoesAfterScroll(DataSet: TDataSet);
+begin
+  inherited;
+  funcionario := TFuncionarioDAO.Create;
+  funcionario.RelatorioDetalheFuncionarioPorFuncao(mdFuncoesCodigo.AsInteger);
+  dbgDetalheFuncionario.DataSource := DataModule1.DataSource2;
 end;
 
 procedure TfrmRelatorioFuncionarioPorFuncao.montaDetalheFuncionarios;
@@ -131,48 +117,7 @@ begin
 
   funcoes := TFuncoesDAO.Create;
   funcoes.RelatorioMasterFuncao;
-
-  //dbgMasterFuncao.DataSource := DataModule1.DataSource1;
   dbgMasterFuncao.SetFocus;
-end;
-
-procedure TfrmRelatorioFuncionarioPorFuncao.PopulaCdsFuncao;
-begin
-  with DataModule1.FDQuery1 do
-  begin
-    First;
-    mdFuncoes.Close;
-    mdFuncoes.Open;
-    while  not (Eof) do
-    begin
-      mdFuncoes.Append;
-      mdFuncoesCodigo.AsInteger    := FieldByName('codigo').AsInteger;
-      mdFuncoesDescricao.AsString  := FieldByName('Descricao').AsString;
-      mdFuncoes.Post;
-      Next;
-    end;
-    mdFuncoes.First;
-  end;
-
-  with DataModule1.FDQuery2 do
-  begin
-    First;
-    mdFuncionarios.Close;
-    mdFuncionarios.Open;
-    while not (Eof) do
-    begin
-      mdFuncionarios.Append;
-      mdFuncionariosCodFuncao.AsInteger := FieldByName('cod_funcao').AsInteger;
-      mdFuncionariosCodigoFuncionario.AsInteger := FieldByName('codigo').AsInteger;
-      mdFuncionariosDTNascimento.AsDateTime := FieldByName('dt_nascimento').AsDateTime;
-      mdFuncionariosSalario.AsFloat := FieldByName('salario').AsFloat;
-      mdFuncionariosNome.AsString := FieldByName('nome').AsString;
-      mdFuncionarios.Post;
-      Next;
-    end;
-  end;
-  mdFuncionarios.First;
-
 end;
 
 end.

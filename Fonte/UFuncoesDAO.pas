@@ -14,6 +14,7 @@ type
     Procedure MostrarFuncoesComRetorno(Retorno: TFuncoesModel);
     procedure RelatorioFuncoes(pOrdem: Integer);
     procedure RelatorioMasterFuncao;
+    procedure RelatorioFuncionarioPorFuncaoImprimir;
   End;
 
 implementation
@@ -129,6 +130,27 @@ begin
   End;
 end;
 
+procedure TFuncoesDAO.RelatorioFuncionarioPorFuncaoImprimir;
+begin
+  with DataModule1.FDQuery3 do
+  begin
+     Close;
+     SQL.Clear;
+     SQL.Text := ' Select fc.descricao, fn.codigo, fn.nome, fn.dt_nascimento, fn.salario ' +#13#10+
+                 '  from funcoes fc ' +#13#10+
+                 '  left join funcionarios fn on (fn.cod_funcao = fc.codigo) ' +#13#10+
+                 '  order by 1 ';
+
+     try
+       Open;
+     except
+       on E: exception do
+       raise Exception.Create('Falha SQL RelatorioFuncionarioPorFuncaoImprimir ' + e.Message);
+     end;
+  end;
+
+end;
+
 procedure TFuncoesDAO.RelatorioFuncoes(pOrdem: Integer);
 begin
   with DataModule1.FDQuery1 do
@@ -158,7 +180,7 @@ begin
   begin
     Close;
     SQL.Clear;
-    SQL.Text := ' Select * from funcoes ';
+    SQL.Text := ' Select * from funcoes order by 1 ';
 
     try
       open;
